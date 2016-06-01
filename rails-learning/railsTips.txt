@@ -1,0 +1,7 @@
+1.  Steps to create an ideal Rails App :
+
+$ mkdir myapp
+$ cd myapp
+$ rvm use ruby-2.3.1@myapp --ruby-version --create
+$ gem install rails
+$ rails new .

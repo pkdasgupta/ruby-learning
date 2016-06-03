@@ -10,14 +10,14 @@
 
 puts "\n\n **** Vowel Remover Program **** \n"
 
-print "Whats Up, Buddy ? : "
+print "\n Whats Up, Buddy ? : "
 STDOUT.flush
 input = gets.chomp
 
 if input.length > 80
     puts "\n Oops! That's a long, long Sentence!"
 else
-    puts "\n Great, But I dont like Vowels : #{input.downcase.delete! ('a','e','i','o','u')}"
+    puts "\n Great, But I dont like Vowels : #{input.gsub!(/[aeiou]|[AEIOU]/,'')}"
 end
 
 puts "\n\n **** !! Thank You !! **** \n"

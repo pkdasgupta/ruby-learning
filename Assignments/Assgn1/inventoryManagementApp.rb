@@ -60,12 +60,13 @@ class Product
         print "Enter Maximum Stock units for #{p.name} : "
         p.max_stock = gets.to_i
 
-        if (p.min_stock < p.units) and (p.units < p.max_stock)
+        if (p.min_stock <= p.units) and (p.units <= p.max_stock) and (p.min_stock < p.max_stock)
             @@products << p
             puts "\n Cool. Product details have been saved Successfully.\n\n"
             p.getProdbyName(p.name)
         else
-            puts "\n Oops! Looks like initial no. of Units dont fall in the range of Min and Max Stocks."
+            puts "\n Oops! Something went wrong while Registering the Product."
+            puts "Looks like initial no. of Units dont fall in the range of Min and Max Stocks or Min Stock units exceed the Max Stock units."
             puts " Please give it a retry with Proper entries."
         end
     end

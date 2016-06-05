@@ -2,6 +2,6 @@
 
 $ mkdir myapp
 $ cd myapp
-$ rvm use ruby-2.3.1@myapp --ruby-version --create
+$ rvm use ruby-2.3.0@myapp --ruby-version --create
 $ gem install rails
 $ rails new .

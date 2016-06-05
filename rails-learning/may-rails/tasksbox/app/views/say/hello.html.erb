@@ -1,0 +1,21 @@
+<h1>Hello Taskboxer!</h1>
+
+<%= link_to "Wanna SignOff ?", say_goodbye_path %>
+<br><br>
+<a href="/say/goodbye">Lets SignOff</a>
+<br>
+
+<% ipl_teams = { "rcb" => ["Virat Kohli", "Chris Gayle", "Abraham Devilliars"], 
+                 "kkr" => ["Gautam Gambhir", "Sunil Naraine", "Yusuf Pathan"],
+                 "mi" => ["Rohit Sharma", "Kirron Pollard", "Corey Anderson"]
+} %>
+
+<% ipl_teams.each { |team, players| %>
+    <ol>
+        <h3> <%= team.upcase %></h3>
+            <% players.each { |player| %>
+                <li> <%= player.capitalize %> </li>
+            <% } %>
+    </ol>
+<% } %>
+

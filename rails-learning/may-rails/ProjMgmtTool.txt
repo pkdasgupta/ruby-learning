@@ -1,0 +1,36 @@
+Users
+    -Email
+    -Passwod
+    -Role
+
+Clients
+    -Name
+    -Company
+    -Mobile
+    -Email
+
+Projects
+    -client_id
+    -name
+    -Description
+    -start_date
+    -end_date
+    -status
+
+Tasks
+    -project_id
+    -title
+    -due_date
+    -is_completed
+
+Time_Tracker
+    -task_id
+    -start_datetime
+    -end_datetime
+
+Categories
+    -name
+
+Project Categories
+    -category_id
+    -project_id

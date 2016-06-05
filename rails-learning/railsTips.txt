@@ -5,3 +5,20 @@ $ cd myapp
 $ rvm use ruby-2.3.0@myapp --ruby-version --create
 $ gem install rails
 $ rails new .
+
+2. Common Errors encountered in rails :
+
+i) Unable to Connect :
+    - Check whether the server is running
+ii) Routing Error : Route is not registered
+    - Go To : config/routes.rb 
+    - register route
+iii) Unknown action : action could not be found in controller
+    - Add the action in specified controller
+iv) Template Missing :
+    - Create the View File
+
+
+3. rails generate model Project client_id:integer name:string description:text start_date:date end_date:date status:string
+
+4. rake db:migrate

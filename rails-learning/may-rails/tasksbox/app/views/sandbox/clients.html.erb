@@ -1,0 +1,16 @@
+<h2>Client List : </h2>
+
+<h3> Total Clients : <%= @clients.size %> </h3>
+
+<ul>
+    <% @clients.each { |client| %>
+        <li>
+            <%= client.name %> : <%= client.company %> - <%= client.mobile %>
+        </li>
+    <% } %>
+</ul>
+
+<h3> Client With ID : </h3>
+<p><%= @client.name %> : <%= @client.company %>
+
+

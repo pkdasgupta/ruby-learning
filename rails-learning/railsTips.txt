@@ -77,3 +77,15 @@ Object can be read as long as in the memory.
 
 13. Has and Belongs to Many (Has Many Through) :
     - where two tables are connected to multiple rows on both sides
+
+14. Creating a Model involves :
+    - Create Model
+    - Run rake db:migrate
+    - Define associations
+
+15. Validation Error Messages :
+    - client.errors.full_messages : To get error messages
+    - client.save(validate: false) : To by-pass validations
+
+16. Validate for Project Name, Start Date, End Date, Client ID, Length of the name should be more 5Characters, Check for uniqueness of project_name, end_date > start_date, 10 < description > 100 Characters, if the start_date > today, project_status != completed
+

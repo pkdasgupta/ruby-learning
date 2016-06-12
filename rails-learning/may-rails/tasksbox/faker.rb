@@ -21,3 +21,14 @@ end
     project.status = ["new", "on-going", "completed"].sample
     project.save
 end
+
+Project.all.each { |project|
+    3.times do 
+        task = Task.new
+        task.title = ["Requirement Gathering", "Feasibility Analysis", "Architecture Design", "SCRUM Meeting"].sample
+        task.due_date = project.start_date + 3.days
+        task.is_completed = [true, false].sample
+        task.project_id = project.id
+        task.save
+    end
+}

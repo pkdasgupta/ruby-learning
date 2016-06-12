@@ -22,3 +22,58 @@ iv) Template Missing :
 3. rails generate model Project client_id:integer name:string description:text start_date:date end_date:date status:string
 
 4. rake db:migrate
+
+5. begin
+     project = Project.find(1000)
+        rescue ActiveRecord::RecordNotFound
+        puts "Project with id not Found"
+   end
+
+6. Update is always a 2-step process.
+    - We first find the record and then update it.
+    project = Project.find(1)
+    project.status = "completed"
+    project.save
+
+    OR
+
+    project = Project.find(2)
+    project.update_attributes(status: "on-going", end_date: Date.today + 2.months)
+
+    - While updating, We can either update a Single Object or an Array of Objects.
+    - In case of an array of objects, We need to iterate through the array and perform the update for each of the elements.
+
+7. Objects are usually destroyed, when destroy method is called, The row is deleted from the DB But you still have access to the object. This object is in a Frozen State which can only be read and not be updated.
+Object can be read as long as in the memory.
+
+8. Associations Types :
+    - has_one
+    - has_many : when a row in one table is related to one or more rows in another table
+    - belongs_to
+    - has_and_belongs_to_many / has_many:through
+
+9. client = Client.first
+    - client.projects : returns array of all the projects that belong to client, empty if none
+    - client.projects.empty? : returns true/false
+    - client.projects.size : returns number of Projects asociated with the Client
+    - client.project_ids
+    - client.projects.pluck(:id)
+
+10. Lazy Loading : One Query for each Project
+    Project.all.each do |project|
+        puts "#{project.name} : #{project.client.try(:name)}"
+    end
+
+    Eager Loading : 
+    Project.includes(:client).each do |project|
+        puts "#{project.name} : #{project.client.try(:name)}"
+    end
+
+11. belongs_to holds the Foriegn-Key reference to the other Entity
+
+12. Create tasks on the Fly with these has_many association features :
+    project.tasks.create(title: "Requirement Specifications", due_date: Date.today, is_completed: false)
+    task = project.tasks.build
+
+13. Has and Belongs to Many (Has Many Through) :
+    - where two tables are connected to multiple rows on both sides

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'garage/clients'
+
+  get 'garage/projects'
+
+  get 'garage/tasks'
+
   get 'sandbox/clients'
 
   get 'sandbox/projects'

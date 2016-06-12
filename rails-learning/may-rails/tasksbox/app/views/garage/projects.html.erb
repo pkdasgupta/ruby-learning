@@ -1,0 +1,21 @@
+<h2>Listing Projects with Task Counts</h2>
+
+<ol>
+    <% @projects.each { |project| %>
+        <li> <%= project.name %> : <%= project.tasks.size %> Tasks </li>
+        <b> Completed Tasks </b>
+        <ul>
+            <% project.tasks.where('is_completed = ?', true).each { |task| %>
+                <li> <%= task.title %> </li>
+            <% } %>
+        </ul>
+
+        <b> Incomplete Tasks </b>
+        <ul>
+            <% project.incomplete_tasks.each { |task| %>
+                <li> <%= task.title %> </li>
+            <% } %>
+        </ul>
+
+        <% } %>
+</ol>

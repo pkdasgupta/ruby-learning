@@ -1,0 +1,7 @@
+<h2>Listing Clients with Project Count</h2>
+
+<ul>
+    <% @clients.each { |client| %>
+        <li> <%= client.name %> : <%= client.projects.size %> </li>
+    <% } %>
+</ul>

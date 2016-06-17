@@ -1,0 +1,10 @@
+-----------------------------------------------------------------
+Classes                         Attributes
+------------------------------------------------------------------
+Student                      name, email, major
+Course                       name, instructor, desc
+Instructor                   name, email, bio
+Registration                 student, course, semester
+Publication                  instructor, title, link
+CourseRating                 course, rating
+------------------------------------------------------------------

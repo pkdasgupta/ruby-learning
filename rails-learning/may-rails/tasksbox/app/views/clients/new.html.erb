@@ -1,0 +1,18 @@
+<h2> Register New Client </h2>
+
+<%= form_for @client do |f| %>
+    <% if @client.errors.any? %>
+        <ul style="color:red">
+            <% @client.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <%= f.label :name %> <%= f.text_field :name %> <br/>
+    <%= f.label :company %> <%= f.text_field :company %> <br/>
+    <%= f.label :email %> <%= f.email_field :email %> <br/>
+    <%= f.label :mobile %> <%= f.text_field :mobile %> <br/>
+
+    <%= f.submit %>
+<% end %>

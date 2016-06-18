@@ -1,0 +1,39 @@
+<%= notice %>
+<h2> Listing Clients : </h2>
+
+<% if @clients.empty? %>
+    <h3> Oops! No Clients registered as Yet ! </h3>
+    <%= link_to "Register Client", new_client_path %>
+<% else %>
+    <h3> Total Clients : <%= @clients.size %> </h3>
+    <%= link_to "Register New Client", new_client_path %><br/><br/>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Project Count</th>
+                <th>Tasks Count</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <% @clients.each_with_index { |client, index| %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= client.name %></td>
+                    <td><%= client.company %></td>
+                    <td><%= client.email %></td>
+                    <td><%= client.projects.count %></td>
+                    <% tsk_cnt = 0 %>
+                    <% client.projects.each { |proj|  %>
+                    <% tsk_cnt += proj.tasks.size } %>
+                    <td><%= Task.joins(:project).where('projects.client_id = ?', client.id).size %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+<% end %>

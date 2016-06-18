@@ -89,3 +89,36 @@ Object can be read as long as in the memory.
 
 16. Validate for Project Name, Start Date, End Date, Client ID, Length of the name should be more 5Characters, Check for uniqueness of project_name, end_date > start_date, 10 < description > 100 Characters, if the start_date > today, project_status != completed
 
+17. REST => Representational State Transfer Protocol
+        - Offers a better interface for client-server operations
+        - REST princliple is based on working with information in the form of resources
+        - There are 7 REST Actions (index, new, create, edit, update, show, destroy)
+        Ex. : For clients
+
+        URL : http://localhost:3000/clients
+        Method : get
+        Action : index : listing resources
+
+        URL : http://localhost:3000/clients/new
+        Method : get
+        Action : new : setting up a form to add a new resource
+
+        URL : http://localhost:3000/clients
+        Method : post
+        Action : create : saving the resource
+
+        URL : http://localhost:3000/clients/1/edit
+        Method : get
+        Action : edit : to show the resource in the form for editing
+
+        URL : http://localhost:3000/clients/1
+        Method : put
+        Action : update : updating the edited resource
+
+        URL : http://localhost:3000/clients/1
+        Method : get
+        Action : show : to show the resource along with its associated resources
+
+        URL : http://localhost:3000/clients/1
+        Method : delete
+        Action : destroy : destroy the resource

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  resources :clients
+
   get 'garage/clients'
 
   get 'garage/projects'

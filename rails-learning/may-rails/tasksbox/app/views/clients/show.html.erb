@@ -1,0 +1,19 @@
+<h2><%= @client.name %></h2>
+<p><%= @client.company %> | <%= @client.email %> | <%= @client.mobile %> </p>
+
+<h3> Total Projects : <%= @client.projects.count %> </h3>
+
+<h3> New and OnGoing Projects : </h3>
+        <ul>
+            <% @client.new_and_ongoing_projects.each { |proj| %>
+                    <li><%= proj.details %> </li>
+                    <% } %>
+        </ul>
+<h3> Completed Projects : </h3>
+        <ul>
+            <% @client.completed_projects.each { |proj| %>
+                    <li><%= proj.details %> </li>
+                    <% } %>
+        </ul>
+
+<%= link_to "Go Back", clients_path %>

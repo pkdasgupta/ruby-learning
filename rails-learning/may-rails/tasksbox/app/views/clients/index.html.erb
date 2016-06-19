@@ -24,7 +24,7 @@
             <% @clients.each_with_index { |client, index| %>
                 <tr>
                     <td><%= index + 1 %></td>
-                    <td><%= client.name %></td>
+                    <td><%= link_to client.name, client_path(client) %></td>
                     <td><%= client.company %></td>
                     <td><%= client.email %></td>
                     <td><%= client.projects.count %></td>
@@ -32,6 +32,7 @@
                     <% client.projects.each { |proj|  %>
                     <% tsk_cnt += proj.tasks.size } %>
                     <td><%= Task.joins(:project).where('projects.client_id = ?', client.id).size %></td>
+                    <td><%= link_to "View Details", client_path(client.id) %>
                 </tr>
             <% } %>
         </tbody>

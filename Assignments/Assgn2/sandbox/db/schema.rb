@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160617191430) do
+ActiveRecord::Schema.define(version: 20160618081033) do
+
+  create_table "batch_students", force: :cascade do |t|
+    t.integer  "batch_id"
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "batches", force: :cascade do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "course_ratings", force: :cascade do |t|
     t.integer  "course_id"
@@ -22,10 +36,10 @@ ActiveRecord::Schema.define(version: 20160617191430) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
-    t.string   "instructor"
+    t.integer  "instructor_id"
     t.text     "desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "instructors", force: :cascade do |t|

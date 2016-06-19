@@ -13,4 +13,12 @@ class Client < ActiveRecord::Base
         Project.where('client_id = ? and status = ?', self.id, "new")
     end
 
+    def new_and_ongoing_projects
+        self.projects.where('status != ?', "completed").order('start_date')
+    end
+
+    def completed_projects
+        self.projects.where('status = ?', "completed").order('end_date DESC')
+    end
+
 end

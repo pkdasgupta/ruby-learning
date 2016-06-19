@@ -21,7 +21,7 @@ class Project < ActiveRecord::Base
     validate :check_valid_date, :check_status
 
     def details
-        "#{name} : #{status} : #{start_date}"
+        "#{name} : #{status} : #{start_date.strftime("%A, %d %B %Y") if !start_date.nil? } : #{end_date.strftime("%A, %d %B %Y") if !end_date.nil?}"
     end
 
     def self.new_projects

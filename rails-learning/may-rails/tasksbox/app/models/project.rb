@@ -28,6 +28,14 @@ class Project < ActiveRecord::Base
         Project.where('status = ?',"new")
     end
 
+    def self.completed_projects
+        Project.where('status = ?',"completed")
+    end
+
+    def self.new_ongoing_projects
+        Project.where('status != ?',"completed")
+    end
+
     def self.search(client, status)
         Project.where('client_id = ? AND status = ?', client, status)
     end

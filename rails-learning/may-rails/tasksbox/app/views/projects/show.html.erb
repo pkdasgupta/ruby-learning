@@ -1,0 +1,18 @@
+<h2> <%= @project.name %> </h2>
+<p> <%= @project.description %> | <%= @project.start_date %> | <%= @project.status %> </p>
+
+<% if !@project.categories.empty? %>
+    <p> Project Categories : <%= @project.categories.pluck(:name).join(", ") %> </p><br/>
+<% end %>
+
+<%= link_to "Edit Project Details", edit_project_path(@project.id) %> | <%= link_to "Delete Project", project_path(@project.id), data: {confirm: "Are you Sure, Mate?", method: :delete} %> 
+
+<%# link_to "Edit Project Details", "/projects/#{@project.id}/edit" %>
+
+<br/><br/>TODO Assignments :
+<ol>
+    <li>Display the count of Total tasks </li>
+    <li>Divide tasks into 3-Groups *Incomplete *Overdue and *Completed </li>
+</ol>
+
+<%= link_to "Go Back", projects_path %>

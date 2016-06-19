@@ -1,23 +1,52 @@
-<h2> Listing Projects </h2>
+<br/><%= notice %>
+
+<h2> Listing Projects : <%= @projects.count %> Projects </h2>
+<%= link_to "Register New Project", new_project_path %><br/><br/>
 
 <% if @projects.empty? %>
     <h3> Oops! Looks like there are No Projects registered ! :( </h3>
     <% link_to "Register Project", new_project_path %>
 <% else %>
-    <table>
+    <p> New and Ongoing Projects </p>
+    <ol>
+        <% Project.new_ongoing_projects.each { |proj| %>
+            <li><%= link_to "Show", project_path(proj.id) %> : <%= proj.details %></li>
+        <% } %>
+    </ol>
+
+    <p> Completed Projects </p>
+    <ol>
+        <% Project.completed_projects.each { |proj| %>
+            <li><%= link_to "Show", project_path(proj.id) %> : <%= proj.details %></li>
+        <% } %>
+    </ol>
+
+    <!--
+    <table border="1">
 
         <thead>
-            <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Status</th>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+            </tr>
         </thead>
         <tbody>
-            <tr>
-                <% projects.each_with_index { |project, index| %>
+            <% @projects.each_with_index { |project, index| %>
+                <tr>
                     <td><%= index + 1 %></td>
-                    <td>
-        
+                    <td><%= project.name %></td>
+                    <td><%= project.description %></td>
+                    <td><%= project.start_date %></td>
+                    <td><%= project.end_date %></td>
+                    <td><%= project.status %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    -->
+<% end %>
 

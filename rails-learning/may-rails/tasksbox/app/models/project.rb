@@ -40,13 +40,17 @@ class Project < ActiveRecord::Base
         Project.where('client_id = ? AND status = ?', client, status)
     end
 
+    def overdue_tasks
+        self.tasks.where('is_completed = ? and due_date < ?', false, Date.today)
+    end
+
     def completed_tasks
         self.tasks.where('is_completed = ?', true)
     end
 
     def incomplete_tasks
         #self is optional
-        tasks.where('is_completed = ?', false)
+        tasks.where('is_completed = ? and due_date > ?', false, Date.today)
     end
 
     private

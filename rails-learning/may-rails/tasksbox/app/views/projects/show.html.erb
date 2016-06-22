@@ -2,7 +2,29 @@
 <p> <%= @project.description %> | <%= @project.start_date %> | <%= @project.status %> </p>
 
 <% if !@project.categories.empty? %>
-    <p> Project Categories : <%= @project.categories.pluck(:name).join(", ") %> </p><br/>
+    <p> Project Categories : <%= @project.categories.pluck(:name).join(", ") %> </p>
+<% end %>
+
+<% if !@project.tasks.empty? %>
+    <p> Project Tasks : <%= @project.tasks.count %> Task(s) </p>
+    <p> OverDue Tasks : <%= @project.overdue_tasks.size %> Task(s) </p>
+    <ol>
+        <% @project.overdue_tasks.each { |task| %>
+            <li> <%= task.title %> | <%= task.due_date %> </li>
+        <% } %>
+    </ol>
+    <p> Incomplete Tasks : <%= @project.incomplete_tasks.size %> Task(s) </p>
+    <ol>
+        <% @project.incomplete_tasks.each { |task| %>
+            <li> <%= task.title %> | <%= task.due_date %> </li>
+        <% } %>
+    </ol>
+    <p> Complete Tasks : <%= @project.completed_tasks.size %> Task(s) </p>
+    <ol>
+        <% @project.completed_tasks.each { |task| %>
+            <li> <%= task.title %> | <%= task.due_date %> </li>
+        <% } %>
+    </ol>
 <% end %>
 
 <%= link_to "Edit Project Details", edit_project_path(@project.id) %> | <%= link_to "Delete Project", project_path(@project.id), data: {confirm: "Are you Sure, Mate?", method: :delete} %> 

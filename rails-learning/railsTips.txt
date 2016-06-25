@@ -122,3 +122,8 @@ Object can be read as long as in the memory.
         URL : http://localhost:3000/clients/1
         Method : delete
         Action : destroy : destroy the resource
+
+18. Life Cycle of an Object :
+
+CallBack is used :
+During the life cycle of an Object If we want to change any data on that Object.

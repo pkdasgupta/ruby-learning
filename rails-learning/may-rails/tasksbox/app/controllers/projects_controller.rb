@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
     def show
         begin
             @project = Project.find(params[:id])
+            @task = Task.new
         rescue ActiveRecord::RecordNotFound
             redirect_to projects_path
         end

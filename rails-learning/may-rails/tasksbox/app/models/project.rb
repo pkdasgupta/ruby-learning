@@ -8,6 +8,10 @@ class Project < ActiveRecord::Base
     has_many :project_categories
     has_many :categories, through: :project_categories
 
+    before_create :generate_project_code
+    before_destroy :delete_all_tasks
+    #before_save :generate_project_code
+
     # colon (:) is used When :
     #   - used before when used as an argument to a Method
     #   - used after for an option of a method
@@ -22,6 +26,14 @@ class Project < ActiveRecord::Base
 
     def details
         "#{name} : #{status} : #{start_date.strftime("%A, %d %B %Y") if !start_date.nil? } : #{end_date.strftime("%A, %d %B %Y") if !end_date.nil?}"
+    end:
+
+    def generate_project_code
+        self.code = "#{self.client.company[0...3]}-#{Project.last.id}"
+    end
+
+    def delete_all_tasks
+        Task.where('project_id = ?', self.id).delete_all_tasks
     end
 
     def self.new_projects

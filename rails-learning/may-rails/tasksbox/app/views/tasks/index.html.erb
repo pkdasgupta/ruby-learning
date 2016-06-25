@@ -1,0 +1,9 @@
+<h3> <%= @project.name %> </h3>
+
+<ul>
+<% for task in @project.tasks %>
+	<li> <%= task.title %> </li>
+	<% end %>
+</ul>
+
+<%= link_to "Go Back", :back %>

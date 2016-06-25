@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Faker Gem to Populate Fake Data
 gem 'faker'
 
+# Paranoia Gem for preventing accidental Delete
+gem 'paranoia'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record

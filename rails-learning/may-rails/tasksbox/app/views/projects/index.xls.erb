@@ -1,0 +1,18 @@
+<h3> All Projects </h3>
+
+<table class="table table-bordered">
+<thead>
+<tr>
+<th> Name </th>
+<th> Client Name </th>
+</tr>
+</thead>
+<tbody>
+<% @projects.each do |project| %>
+	<tr>
+	<td> <%= project.name %> </td>
+	<td> <%= project.client.try(:name) %> </td>
+	</tr>
+	<% end %>
+</tbody>
+</table>

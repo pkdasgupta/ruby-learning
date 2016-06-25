@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   
+  get 'tasks/mark_as_complete'
+  get 'tasks/mark_as_incomplete'
+
+
   resources :clients
-  resources :projects
+  
+  resources :projects do
+    resources :tasks
+  end
 
   get 'garage/clients'
 

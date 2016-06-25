@@ -16,25 +16,46 @@
     <p> Incomplete Tasks : <%= @project.incomplete_tasks.size %> Task(s) </p>
     <ol>
         <% @project.incomplete_tasks.each { |task| %>
-            <li> <%= task.title %> | <%= task.due_date %> </li>
+            <li> <%= task.title %> | <%= task.due_date %> | <%= link_to "Mark as Complete", tasks_mark_as_complete_path(task_id: task.id) %> </li>
         <% } %>
     </ol>
     <p> Complete Tasks : <%= @project.completed_tasks.size %> Task(s) </p>
     <ol>
         <% @project.completed_tasks.each { |task| %>
-            <li> <%= task.title %> | <%= task.due_date %> </li>
+            <li> <%= task.title %> | <%= task.due_date %> | <%= link_to "Mark as Incomplete", tasks_mark_as_incomplete_path(task_id: task.id) %> |
+            <%= link_to "edit", edit_project_task_path(@project.id, task.id) %> |
+            <%= link_to "show", project_task_path(@project.id, task.id) %> |
+            <%= link_to "show   all tasks", project_tasks_path(@project.id) %> |
+            <%= link_to "Destroy", project_task_path(@project.id, task.id), method: :delete %>
+            </li>
         <% } %>
     </ol>
+<% end %>
+
+<h3> Add Task </h3>
+<%= form_for [@project, @task], :html => {:class => "form-inline"} do |f| %>
+    <label> Title </label><br/>
+    <%= f.text_field :title %> <br/><br/>
+
+    <label> Due Date </label><br/>
+    <%= f.date_select :due_date %> <br/><br/>
+
+    <%= f.hidden_field :project_id, value: @project.id %>
+    <%= f.check_box :is_completed %> Completed ? <br/><br/>
+
+    <%= f.submit %><br/><br/>
 <% end %>
 
 <%= link_to "Edit Project Details", edit_project_path(@project.id) %> | <%= link_to "Delete Project", project_path(@project.id), data: {confirm: "Are you Sure, Mate?", method: :delete} %> 
 
 <%# link_to "Edit Project Details", "/projects/#{@project.id}/edit" %>
 
+<!---
 <br/><br/>TODO Assignments :
 <ol>
     <li>Display the count of Total tasks </li>
     <li>Divide tasks into 3-Groups *Incomplete *Overdue and *Completed </li>
 </ol>
+-->
 
 <%= link_to "Go Back", projects_path %>

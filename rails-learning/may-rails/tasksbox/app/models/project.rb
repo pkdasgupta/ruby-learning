@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
     belongs_to :client
+    belongs_to :user
     has_many :tasks
 
     #has_many :join_table_name
@@ -26,10 +27,10 @@ class Project < ActiveRecord::Base
 
     def details
         "#{name} : #{status} : #{start_date.strftime("%A, %d %B %Y") if !start_date.nil? } : #{end_date.strftime("%A, %d %B %Y") if !end_date.nil?}"
-    end:
+    end
 
     def generate_project_code
-        self.code = "#{self.client.company[0...3]}-#{Project.last.id}"
+        self.code = "#{self.client.company[0...3]}-#{Project.last.nil? ? 0 : Project.last.id}"
     end
 
     def delete_all_tasks
@@ -75,7 +76,7 @@ class Project < ActiveRecord::Base
     end
 
     def check_status
-        if self.start_date > Date.today
+        if self.status == "completed" && self.start_date > Date.today 
             errors.add(:status, "Status can NOT be complete for Start Date later than Today")
         end
     end

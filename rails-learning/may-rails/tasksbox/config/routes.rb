@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  devise_for :users
   get 'tasks/mark_as_complete'
   get 'tasks/mark_as_incomplete'
 
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+   root 'projects#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

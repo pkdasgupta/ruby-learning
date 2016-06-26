@@ -127,3 +127,13 @@ Object can be read as long as in the memory.
 
 CallBack is used :
 During the life cycle of an Object If we want to change any data on that Object.
+
+19. Steps to install authentication gem (devise) :
+
+i. Add to Gemfile
+ii. bundle install
+iii. rails generate devise:install
+iv. Follow the instructions from step iii
+v. Setup the User model using : rails generate devise User
+vi. rake db:migrate
+

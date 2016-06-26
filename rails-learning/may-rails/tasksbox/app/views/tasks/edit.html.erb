@@ -1,0 +1,15 @@
+<h3> Add Task </h3>
+<%= form_for [@project, @task], :html => {:class => "form-inline"} do |f| %>
+    <label> Title </label><br/>
+    <%= f.text_field :title %> <br/><br/>
+
+    <label> Due Date </label><br/>
+    <%= f.date_select :due_date %> <br/><br/>
+
+    <%= f.hidden_field :project_id, value: @project.id %>
+    <%= f.check_box :is_completed %> Completed ? <br/><br/>
+
+    <%= f.submit %><br/><br/>
+<% end %>
+
+<%= link_to "Go Back", :back %>

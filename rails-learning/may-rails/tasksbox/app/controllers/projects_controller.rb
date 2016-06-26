@@ -1,6 +1,9 @@
 class ProjectsController < ApplicationController
+    
+    before_filter :authenticate_user! #except: [:index]
+    
     def index
-        @projects = Project.all
+        @projects = current_user.projects
     end
 
     def new 
@@ -9,10 +12,10 @@ class ProjectsController < ApplicationController
 
     def show
         begin
-            @project = Project.find(params[:id])
+            @project = current_user.projects.find(params[:id])
             @task = Task.new
         rescue ActiveRecord::RecordNotFound
-            redirect_to projects_path
+            redirect_to projects_path, notice: "Oops! Project Unavailable !!"
         end
     end
 
@@ -31,6 +34,7 @@ class ProjectsController < ApplicationController
 
     def create
         @project = Project.new(project_params)
+        @project.user_id = current_user.id
         if @project.save
             redirect_to projects_path, notice: "Cool..Project Successfully Registered ! :)"
         else

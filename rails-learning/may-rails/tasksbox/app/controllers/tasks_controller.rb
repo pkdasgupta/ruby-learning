@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 
+	before_filter :authenticate_user!
+	
 	def index
 		@project = Project.find(params[:project_id])
 	end
@@ -27,6 +29,11 @@ class TasksController < ApplicationController
 		task = Task.find(params[:task_id])
 		task.update_attributes(is_completed: false)
 		redirect_to :back
+	end
+
+	def edit
+		@project = Project.find(params[:project_id])
+		@task = Task.new
 	end
 
 	def create

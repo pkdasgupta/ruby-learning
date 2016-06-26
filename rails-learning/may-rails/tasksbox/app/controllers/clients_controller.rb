@@ -1,7 +1,9 @@
 class ClientsController < ApplicationController
     
+    before_filter :authenticate_user!
+    
     def index
-        @clients = Client.all
+        @clients = current_user.clients
     end
 
     def new
@@ -9,11 +11,12 @@ class ClientsController < ApplicationController
     end
 
     def show
-        @client = Client.find(params[:id])
+        @client = current_user.clients.find(params[:id])
     end
 
     def create
         @client = Client.new(client_params)
+        @client.user_id = current_user.id
         if @client.save
             redirect_to clients_path, notice: "Cool..Client Successfully Registered ! :)"
         else

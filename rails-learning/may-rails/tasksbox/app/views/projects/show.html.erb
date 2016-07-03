@@ -46,7 +46,7 @@
     <%= f.submit %><br/><br/>
 <% end %>
 
-<%= link_to "Edit Project Details", edit_project_path(@project.id) %> | <%= link_to "Delete Project", project_path(@project.id), data: {confirm: "Are you Sure, Mate?", method: :delete} %> |
+<%= link_to "Edit Project Details", edit_project_path(@project.id) %> | <% if can? :destroy, @project %> <%= link_to "Delete Project", project_path(@project.id), data: {confirm: "Are you Sure, Mate?", method: :delete} %> <% end %> |
 
 <%# link_to "Edit Project Details", "/projects/#{@project.id}/edit" %>
 

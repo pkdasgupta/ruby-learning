@@ -9,7 +9,7 @@ class Ability
     if user.role? "admin"
         can :manage, :all
     elsif user.role? "user"
-        can [:create, :read, :update], [Project, Client, Task]
+        can [:read, :update], [Project, Client, Task]
     elsif user.role? "vendor"
         can [:create, :read, :update], Product
     end

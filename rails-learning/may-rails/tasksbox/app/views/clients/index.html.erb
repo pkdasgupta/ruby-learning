@@ -5,7 +5,9 @@
         <h3> Oops! No Clients registered as Yet ! </h3>
         <%= link_to "Register Client", new_client_path %>
     <% else %>
+    <% if can? :create, Client.new %>
         <%= link_to "Register New Client", new_client_path %><br/><br/>
+    <% end %>
         <table class="table table-hover">
             <thead>
                 <tr>

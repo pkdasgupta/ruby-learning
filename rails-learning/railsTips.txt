@@ -175,4 +175,9 @@ In controller level, We use the method 'layout <layout_name>' at the beginning o
 
 24. CanCan Gem : For Authorization 
     - rails g cancan:ability
-    - 
+
+25. rails g scaffold ModelName att1:type att2:type att3:type
+
+26. Gems for Backend Admin
+    -ActiveAdmin 
+    -Administrate

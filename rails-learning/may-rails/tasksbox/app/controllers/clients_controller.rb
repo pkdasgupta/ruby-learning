@@ -1,6 +1,9 @@
 class ClientsController < ApplicationController
     
     before_filter :authenticate_user!
+
+    load_and_authorize_resource
+    #load_and_authorize_all - for custom actions
     
     def index
         @clients = current_user.clients

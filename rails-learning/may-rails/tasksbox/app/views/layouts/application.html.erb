@@ -4,6 +4,8 @@
         <title>Tasksbox</title>
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
+
         <%= csrf_meta_tags %>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -28,6 +30,9 @@
         <% else %>
             <%= link_to "Register", new_user_registration_path %> | <%= link_to "Login", new_user_session_path %>
         <% end %>
+
+        <br/> <br/>
+        <%= link_to "Dashboard" %> | <%= link_to "Clients", clients_path %> | <%= link_to "Projects", projects_path %>
 
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>

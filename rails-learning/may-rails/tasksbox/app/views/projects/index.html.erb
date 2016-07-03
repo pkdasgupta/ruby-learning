@@ -1,5 +1,8 @@
 <h2> Listing Projects : <%= @projects.count %> Projects </h2> 
-<%= link_to "Register New Project", new_project_path %> | <%= link_to "Export to Excel", projects_path(format: "xls") %> <br/><br/>
+<%= current_project["name"] %> | <%= link_to "Register New Project", new_project_path %> | <%= link_to "Export to Excel", projects_path(format: "xls") %> <br/><br/>
+
+<%#= debug(session[:project]) %>
+<%# debug(session) %>
 
 <% if @projects.empty? %>
     <h3> Oops! Looks like there are No Projects registered ! :( </h3>
@@ -8,7 +11,7 @@
     <p> New and Ongoing Projects </p>
     <div class="list-group">
         <ol>
-            <% Project.new_ongoing_projects.each { |proj| %>
+            <% Project.new_ongoing_projects(current_user).each { |proj| %>
                 <%= link_to proj.details, project_path(proj.id), class: "list-group-item" %>
             <% } %>
         </ol>
@@ -17,7 +20,7 @@
     <p> Completed Projects </p>
     <div class="list-group">
         <ol>
-            <% Project.completed_projects.each { |proj| %>
+            <% Project.completed_projects(current_user).each { |proj| %>
                 <%= link_to proj.details, project_path(proj.id), class: "list-group-item" %>
             <% } %>
         </ol>
@@ -50,5 +53,16 @@
         </tbody>
         </table>
     -->
-<% end %>
 
+<h3> Project Status </h3>
+<%
+
+    new_projects = current_user.projects.where('status = ?', "new").count
+    ongoing_projects = current_user.projects.where('status = ?', "on-going").count
+    completed_projects = current_user.projects.where('status = ?', "completed").count
+
+%>
+
+<%= pie_chart({"New" => new_projects, "On-Going" => ongoing_projects, "Completed" => completed_projects}) %>
+
+<% end %>

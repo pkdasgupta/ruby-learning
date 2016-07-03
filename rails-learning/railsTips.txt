@@ -1,3 +1,21 @@
+Reference Books :
+    Ruby : 
+        Peter Cooper (320 Pages)
+    Rails : 
+        Agile Web Development with rails
+        Beginning Rails 4
+        Crafting Rails 4 Application
+        ruby on rails tutorials : Michael Hartl
+
+        Rails 4 Way (Reference : O.B.Fernandis)
+
+    Test Driven Development (TDD) : rspewith Ruby
+
+Videos :
+    railscast.com
+    gorails.com
+
+
 1.  Steps to create an ideal Rails App :
 
 $ mkdir myapp
@@ -137,3 +155,24 @@ iv. Follow the instructions from step iii
 v. Setup the User model using : rails generate devise User
 vi. rake db:migrate
 
+20. In many Organisations, Templating engine happens to be .haml instead of .erb
+
+21. Whenever there is an HTML file in the layouts folder, that matches the name of the controller, then that controller will use its own layout and does not depend on application.html.erb
+
+22. Layouts can be shifted at the controller level as well as the actions level.
+
+In controller level, We use the method 'layout <layout_name>' at the beginning of the file. In the action level, We use the method 'render :<layout_name>' at the end of the action.
+
+=> Assignment : 
+
+1. Timeline : Task_Name, Project_start_date, Task_due_date
+
+2. Line chart for tasks in general : Date v/s Task-due date
+
+3. Multiple line Series : Plot project due dates for each client
+
+23. During instance level caching(||=), the return-type will be a Hash instead of an Object while assignment (=)
+
+24. CanCan Gem : For Authorization 
+    - rails g cancan:ability
+    - 

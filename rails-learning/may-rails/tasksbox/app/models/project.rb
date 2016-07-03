@@ -41,12 +41,12 @@ class Project < ActiveRecord::Base
         Project.where('status = ?',"new")
     end
 
-    def self.completed_projects
-        Project.where('status = ?',"completed")
+    def self.completed_projects(user)
+        user.projects.where('status = ?',"completed")
     end
 
-    def self.new_ongoing_projects
-        Project.where('status != ?',"completed")
+    def self.new_ongoing_projects(user)
+        user.projects.where('status != ?',"completed")
     end
 
     def self.search(client, status)

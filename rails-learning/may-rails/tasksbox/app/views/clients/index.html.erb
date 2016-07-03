@@ -38,3 +38,14 @@
         </table>
 </div>
 <% end %>
+
+<% data = {}
+
+@clients.each do |client|
+    data[client.name] = client.projects.size 
+end %>
+
+<h3> Project Graph </h3>
+<%= column_chart(data) %>
+
+

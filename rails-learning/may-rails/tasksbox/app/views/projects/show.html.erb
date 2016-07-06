@@ -32,6 +32,17 @@
     </ol>
 <% end %>
 
+<h3> Tasks Timeline </h3><br/>
+<% data = []
+   @project.tasks.each { |task| 
+    data << [task.title, @project.start_date, task.due_date] 
+    } %>
+
+<%= timeline data %>
+
+<h3> Tasks Line-Chart </h3>
+<%= line_chart Task.group(:due_date).count, label: "Task Due Dates", xtitle: "Task Due Dates", ytitle: "Count" %>
+
 <h3> Add Task </h3>
 <%= form_for [@project, @task], :html => {:class => "form-inline"} do |f| %>
     <label> Title </label><br/>

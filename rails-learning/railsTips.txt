@@ -169,7 +169,7 @@ In controller level, We use the method 'layout <layout_name>' at the beginning o
 
 2. Line chart for tasks in general : Date v/s Task-due date
 
-3. Multiple line Series : Plot project due dates for each client
+3. Multiple line Series : Plot project end dates for each client
 
 23. During instance level caching(||=), the return-type will be a Hash instead of an Object while assignment (=)
 

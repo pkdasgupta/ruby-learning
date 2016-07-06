@@ -47,7 +47,14 @@
     data[client.name] = client.projects.size 
 end %>
 
-<h3> Project Graph </h3>
-<%= column_chart(data) %>
+<h3> Project Graph (i) </h3>
+<%= column_chart data, stacked: true, xtitle: "Clients", ytitle: "No. of Projects" %>
+
+<h3> Project Graph (ii) </h3>
+<%= bar_chart(data) %>
+
+<h3> Project End-Dates </h3>
+<%= line_chart @clients.map { |client| 
+                {name: client.name, data: client.projects.group(:end_date).count}} %>
 
 

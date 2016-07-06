@@ -15,6 +15,9 @@ gem 'chartkick'
 # Cancan gem for Authorization
 gem 'cancan'
 
+# GroupDate gem for grouping data
+gem 'groupdate'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record

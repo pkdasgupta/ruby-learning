@@ -23,4 +23,13 @@ class Client < ActiveRecord::Base
         self.projects.where('status = ?', "completed").order('end_date DESC')
     end
 
+    def name_company
+        "#{name} - #{company}"
+    end
+
+
+ #   def to_param
+ #       "#{name}"
+ #   end
+
 end

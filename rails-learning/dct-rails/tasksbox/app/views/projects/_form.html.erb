@@ -8,11 +8,17 @@
 
     <% end %>
 
-    <label> Client </label> 
-    <%= f.collection_select :client_id, Client.all, :id, :company, prompt: "Select Client" %><br/><br/>
+<div class="container">
 
+<div class="form-group">
+    <label> Client </label> 
+    <%= f.collection_select :client_id, current_user.clients.all, :id, :company, {prompt: "Select Client"}, {class: "form-control"} %><br/><br/>
+</div>
+
+</div class="form-group">
     <label> Project Name </label>
-    <%= f.text_field :name, placeholder: "Please Enter Project Name" %><br/><br/>
+    <%= f.text_field :name, placeholder: "Please Enter Project Name", class: "form-control" %><br/><br/>
+</div>
 
     <label> Description </label>
     <%= f.text_area :description, rows: 4, cols: 25 %><br/><br/>
@@ -39,3 +45,5 @@
     <%= f.submit "Submit" %>
 
 <% end %>
+
+</div>

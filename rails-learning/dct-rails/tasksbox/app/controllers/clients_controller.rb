@@ -14,6 +14,8 @@ class ClientsController < ApplicationController
     end
 
     def show
+        #@client = current_user.clients.where('name = ?', params[:id])[0]
+        #@client = current_user.clients.find_by_name(params[:id])
         @client = current_user.clients.find(params[:id])
     end
 

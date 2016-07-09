@@ -1,60 +1,79 @@
-<div class="container">
-    <h2> Listing Clients : <%= @clients.size %> Clients </h2>
-
-    <% if @clients.empty? %>
-        <h3> Oops! No Clients registered as Yet ! </h3>
-        <%= link_to "Register Client", new_client_path %>
-    <% else %>
-    <% if can? :create, Client.new %>
-        <%= link_to "Register New Client", new_client_path %><br/><br/>
-    <% end %>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Company</th>
-                    <th>Email</th>
-                    <th>Project Count</th>
-                    <th>Tasks Count</th>
-                    <th>Actions</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <% @clients.each_with_index { |client, index| %>
-                    <tr>
-                        <td><%= index + 1 %></td>
-                        <td><%= link_to client.name, client_path(client) %></td>
-                        <td><%= client.company %></td>
-                        <td><%= client.email %></td>
-                        <td><%= client.projects.count %></td>
-                        <% tsk_cnt = 0 %>
-                        <% client.projects.each { |proj|  %>
-                            <% tsk_cnt += proj.tasks.size } %>
-                            <td><%= Task.joins(:project).where('projects.client_id = ?', client.id).size %></td>
-                            <td><%= link_to "View Details", client_path(client.id) %>
-                </tr>
-            <% } %>
-            </tbody>
-        </table>
+<div class="row">
+    <div class="page-header">
+        <h2>Clients <small><%= controller.action_name %></small></h2>
+    </div>
 </div>
-<% end %>
 
-<% data = {}
+<div class="row">
+    <div class="col-md-8">
+        <% if @clients.empty? %>
+            <h3> Oops! No Clients registered as Yet ! </h3>
+            <%= link_to "Register Client", new_client_path %>
+        <% else %>
 
-@clients.each do |client|
-    data[client.name] = client.projects.size 
-end %>
+            <% if can? :create, Client.new %>
+                <%= link_to "Register New Client", new_client_path %><br/><br/>
+            <% end %>
 
-<h3> Project Graph (i) </h3>
-<%= column_chart data, stacked: true, xtitle: "Clients", ytitle: "No. of Projects" %>
+            <h3>Total Clients : <%= @clients.size %></h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Email</th>
+                        <th>Project Count</th>
+                        <th>Tasks Count</th>
+                        <th>Actions</th>
 
-<h3> Project Graph (ii) </h3>
-<%= bar_chart(data) %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @clients.each_with_index { |client, index| %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= link_to client.name, client_path(client) %></td>
+                            <td><%= client.company %></td>
+                            <td><%= client.email %></td>
+                            <td><%= client.projects.count %></td>
+                            <% tsk_cnt = 0 %>
+                            <% client.projects.each { |proj|  %>
+                                <% tsk_cnt += proj.tasks.size } %>
+                                <td><%= Task.joins(:project).where('projects.client_id = ?', client.id).size %></td>
+                                <td> <%= link_to client_path(client) do %>
+                                    <i class="glyphicon glyphicon-eye-open"></i><%end%>
+                                </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <% end %>
+        <%#= link_to "Add Client", new_client_path, class: "btn btn-default" %>
 
-<h3> Project End-Dates </h3>
-<%= line_chart @clients.map { |client| 
-                {name: client.name, data: client.projects.group(:end_date).count}} %>
+        <%= link_to new_client_path, class: "btn btn-default" do %>
+            <i class="glyphicon glyphicon-plus"></i> Client
+        <% end %>
+    </div>
 
+    <div class="col-md-4">
+        <h2>Stats</h2>
 
+        <% data = {}
+
+        @clients.each do |client|
+            data[client.name] = client.projects.size 
+        end %>
+
+        <h3> Project Graph (i) </h3>
+        <%= column_chart data, stacked: true, xtitle: "Clients", ytitle: "No. of Projects" %>
+
+        <h3> Project Graph (ii) </h3>
+        <%= bar_chart(data) %>
+
+        <h3> Project End-Dates </h3>
+        <%= line_chart @clients.map { |client| 
+        {name: client.name, data: client.projects.group(:end_date).count}} %>
+    </div>
+
+</div>

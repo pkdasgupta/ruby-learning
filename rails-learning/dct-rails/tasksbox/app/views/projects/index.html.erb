@@ -1,71 +1,80 @@
-<h2> Listing Projects : <%= @projects.count %> Projects </h2> 
-<%= current_project["name"] %> | <%= link_to "Register New Project", new_project_path %> | <%= link_to "Export to Excel", projects_path(format: "xls") %> <br/><br/>
+<div class="row">
+    <div class="page-header">
+        <h2>Projects <small><%= controller.action_name %></small></h2>
+    </div>
+</div>
 
+<%= current_project["name"] %> | <%= link_to "Register New Project", new_project_path %> | <%= link_to "Export to Excel", projects_path(format: "xls") %> <br/><br/>
 <%#= debug(session[:project]) %>
 <%# debug(session) %>
 
-<% if @projects.empty? %>
-    <h3> Oops! Looks like there are No Projects registered ! :( </h3>
-    <% link_to "Register Project", new_project_path %>
-<% else %>
-    <p> New and Ongoing Projects </p>
-    <div class="list-group">
-        <ol>
-            <% Project.new_ongoing_projects(current_user).each { |proj| %>
-                <%= link_to proj.details, project_path(proj.id), class: "list-group-item" %>
-            <% } %>
-        </ol>
+<div class="row">
+    <div class="col-md-8">
+        <% if @projects.empty? %>
+            <h3> Oops! Looks like there are No Projects registered ! :( </h3>
+            <% link_to "Register Project", new_project_path %>
+        <% else %>
+            <div class="container-fluid">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#new_and_ongoing" aria-controls="home" role="tab" data-toggle="tab"> New and OnGoing </a></li>
+                    <li role="presentation"><a href="#completed" aria-controls="profile" role="tab" data-toggle="tab">Completed</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="new_and_ongoing">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Project Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @projects.where('status != ?', "completed").order('start_date').each { |proj| %>
+
+                                    <tr>
+                                        <td><%= link_to proj.details, project_path(proj.id) %></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>          
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="completed">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Project Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @projects.where('status = ?', "completed").order('start_date').each { |proj| %>
+                                    <tr>
+                                        <td><%= link_to proj.details, project_path(proj.id) %></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
     </div>
 
-    <p> Completed Projects </p>
-    <div class="list-group">
-        <ol>
-            <% Project.completed_projects(current_user).each { |proj| %>
-                <%= link_to proj.details, project_path(proj.id), class: "list-group-item" %>
-            <% } %>
-        </ol>
-    </div>
+    <div class="col-md-4">
+        <h2>Project Status</h2>
+        <%
 
-    <!--
-        <table border="1">
+                new_projects = current_user.projects.where('status = ?', "new").count
+        ongoing_projects = current_user.projects.where('status = ?', "on-going").count
+        completed_projects = current_user.projects.where('status = ?', "completed").count
 
-        <thead>
-        <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @projects.each_with_index { |project, index| %>
-            <tr>
-            <td><%= index + 1 %></td>
-            <td><%= project.name %></td>
-            <td><%= project.description %></td>
-            <td><%= project.start_date %></td>
-            <td><%= project.end_date %></td>
-            <td><%= project.status %></td>
-            </tr>
-        <% } %>
-        </tbody>
-        </table>
-    -->
-
-
-
-
-<h3> Project Status </h3>
-<%
-
-    new_projects = current_user.projects.where('status = ?', "new").count
-    ongoing_projects = current_user.projects.where('status = ?', "on-going").count
-    completed_projects = current_user.projects.where('status = ?', "completed").count
-
-%>
+    %>
 
 <%= pie_chart({"New" => new_projects, "On-Going" => ongoing_projects, "Completed" => completed_projects}) %>
 
-<% end %>
+        <% end %>
+    </div>
+</div>

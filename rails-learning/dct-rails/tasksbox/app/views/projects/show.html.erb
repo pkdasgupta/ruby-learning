@@ -1,72 +1,100 @@
-<h2> <%= @project.name %> </h2>
-<p> <%= @project.description %> | <%= @project.start_date %> | <%= @project.status %> </p>
+<div class="row">
+    <div class="page-header">
+        <h2> <%= @project.name %> <small><%= @project.description %> | <%= @project.start_date %> | <%= @project.status %> </small></h2>
+    </div>
+</div>
 
-<% if !@project.categories.empty? %>
-    <p> Project Categories : <%= @project.categories.pluck(:name).join(", ") %> </p>
-<% end %>
+<div class="row">
+    <div class="col-md-8">
+        <% if !@project.categories.empty? %>
+            <p> Project Categories : <%= @project.categories.pluck(:name).join(", ") %> </p>
+        <% end %>
 
-<% if !@project.tasks.empty? %>
-    <p> Project Tasks : <%= @project.tasks.count %> Task(s) </p>
-    <p> OverDue Tasks : <%= @project.overdue_tasks.size %> Task(s) </p>
-    <ol>
-        <% @project.overdue_tasks.each { |task| %>
-            <li> <%= task.title %> | <%= task.due_date %> </li>
-        <% } %>
-    </ol>
-    <p> Incomplete Tasks : <%= @project.incomplete_tasks.size %> Task(s) </p>
-    <ol>
-        <% @project.incomplete_tasks.each { |task| %>
-            <li> <%= task.title %> | <%= task.due_date %> | <%= link_to "Mark as Complete", tasks_mark_as_complete_path(task_id: task.id) %> </li>
-        <% } %>
-    </ol>
-    <p> Complete Tasks : <%= @project.completed_tasks.size %> Task(s) </p>
-    <ol>
-        <% @project.completed_tasks.each { |task| %>
-            <li> <%= task.title %> | <%= task.due_date %> | <%= link_to "Mark as Incomplete", tasks_mark_as_incomplete_path(task_id: task.id) %> |
-            <%= link_to "edit", edit_project_task_path(@project.id, task.id) %> |
-            <%= link_to "show", project_task_path(@project.id, task.id) %> |
-            <%= link_to "show   all tasks", project_tasks_path(@project.id) %> |
-            <%= link_to "Destroy", project_task_path(@project.id, task.id), method: :delete %>
-            </li>
-        <% } %>
-    </ol>
-<% end %>
+        <% if !@project.tasks.empty? %>
+            <p> Project Tasks : <%= @project.tasks.count %> Task(s) </p>
+            <p> OverDue Tasks : <%= @project.overdue_tasks.size %> Task(s) </p>
+            <ol>
+                <% @project.overdue_tasks.each { |task| %>
+                    <li> <%= task.title %> | <%= task.due_date %> </li>
+                <% } %>
+            </ol>
+            <p> Incomplete Tasks : <%= @project.incomplete_tasks.size %> Task(s) </p>
+            <ol>
+                <% @project.incomplete_tasks.each { |task| %>
+                    <li> <%= task.title %> | <%= task.due_date %> | <%= link_to "Mark as Complete", tasks_mark_as_complete_path(task_id: task.id) %> </li>
+                <% } %>
+            </ol>
+            <p> Complete Tasks : <%= @project.completed_tasks.size %> Task(s) </p>
+            <ol>
+                <% @project.completed_tasks.each { |task| %>
+                    <li> <%= task.title %> | <%= task.due_date %> | <%= link_to "Mark as Incomplete", tasks_mark_as_incomplete_path(task_id: task.id) %> |
+                        <%= link_to "edit", edit_project_task_path(@project.id, task.id) %> |
+                        <%= link_to "show", project_task_path(@project.id, task.id) %> |
+                        <%= link_to "show   all tasks", project_tasks_path(@project.id) %> |
+                        <%= link_to "Destroy", project_task_path(@project.id, task.id), method: :delete %>
+                    </li>
+                <% } %>
+            </ol>
+        <% end %>
 
-<h3> Tasks Timeline </h3><br/>
-<% data = []
-   @project.tasks.each { |task| 
-    data << [task.title, @project.start_date, task.due_date] 
-    } %>
+        <h3> Tasks Timeline </h3><br/>
+        <% data = []
+        @project.tasks.each { |task| 
+            data << [task.title, @project.start_date, task.due_date] 
+        } %>
 
-<%= timeline data %>
+    <%= timeline data %>
 
-<h3> Tasks Line-Chart </h3>
-<%= line_chart Task.group(:due_date).count, label: "Task Due Dates", xtitle: "Task Due Dates", ytitle: "Count" %>
+    <h3> Tasks Line-Chart </h3>
+    <%= line_chart Task.group(:due_date).count, label: "Task Due Dates", xtitle: "Task Due Dates", ytitle: "Count" %>
 
-<h3> Add Task </h3>
-<%= form_for [@project, @task], :html => {:class => "form-inline"} do |f| %>
-    <label> Title </label><br/>
-    <%= f.text_field :title %> <br/><br/>
 
-    <label> Due Date </label><br/>
-    <%= f.date_select :due_date %> <br/><br/>
+    <%= link_to "Edit Project Details", edit_project_path(@project.id) %> <% if can? :destroy, @project %> | <%= link_to "Delete Project", project_path(@project.id), data: {confirm: "Are you Sure, Mate?", method: :delete} %> <% end %> |
 
-    <%= f.hidden_field :project_id, value: @project.id %>
-    <%= f.check_box :is_completed %> Completed ? <br/><br/>
+    <%# link_to "Edit Project Details", "/projects/#{@project.id}/edit" %>
 
-    <%= f.submit %><br/><br/>
-<% end %>
+    <%= link_to "Go Back", projects_path %>
+    </div>
 
-<%= link_to "Edit Project Details", edit_project_path(@project.id) %> | <% if can? :destroy, @project %> <%= link_to "Delete Project", project_path(@project.id), data: {confirm: "Are you Sure, Mate?", method: :delete} %> <% end %> |
+    <div class="col-md-4">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addTask">
+            Add Task
+        </button>
 
-<%# link_to "Edit Project Details", "/projects/#{@project.id}/edit" %>
+        <!-- Modal -->
+        <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add Task</h4>
+                    </div>
+                    <div class="modal-body">
+                        <%= form_for [@project, @task] do |f| %>
 
-<!---
-<br/><br/>TODO Assignments :
-<ol>
-    <li>Display the count of Total tasks </li>
-    <li>Divide tasks into 3-Groups *Incomplete *Overdue and *Completed </li>
-</ol>
--->
+                            <div class="form-group">
+                                <label> Title </label><br/>
+                                <%= f.text_field :title , class: "form-control"%> <br/><br/>
+                            </div>
 
-<%= link_to "Go Back", projects_path %>
+                            <div class="form-group">
+                                <label> Due Date </label><br/>
+                                <%= f.date_select :due_date , class: "form-control"%> <br/><br/>
+                            </div>
+
+                            <%= f.hidden_field :project_id, value: @project.id %>
+                            <%= f.check_box :is_completed %> Completed ? <br/><br/>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <%= f.submit "Add", type: "button", class: "btn btn-primary" %>
+                    <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

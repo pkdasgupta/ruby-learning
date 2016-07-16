@@ -1,0 +1,4 @@
+$('#new_category').hide();
+$('#add_category').show();
+$('#count').text('<%= Category.count %>');
+$('#cg').append('<li id="li_<%= @category.id %>"> <%= @category.name %> <%= link_to "x", category_path(@category), method: :delete, data: {confirm: "Are you Sure?", remote: true} %> </li>');

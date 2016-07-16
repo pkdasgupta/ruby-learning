@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
     #load_and_authorize_all - for custom actions
     
     def index
-        @clients = current_user.clients
+        @clients = current_user.is_admin ? Client.all : current_user.clients
     end
 
     def new
@@ -14,14 +14,13 @@ class ClientsController < ApplicationController
     end
 
     def show
-        #@client = current_user.clients.where('name = ?', params[:id])[0]
         #@client = current_user.clients.find_by_name(params[:id])
         @client = current_user.clients.find(params[:id])
     end
 
     def create
         @client = Client.new(client_params)
-        @client.user_id = current_user.id
+        @client.user_id = current_user.is_admin ? params[:client][:user_id] : current_user.id
         if @client.save
             redirect_to clients_path, notice: "Cool..Client Successfully Registered ! :)"
         else

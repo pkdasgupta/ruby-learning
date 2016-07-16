@@ -9,6 +9,13 @@
         </ul>
     <% end %>
 
+    <% if current_user.is_admin %>
+    <div class="form-group">
+    <%= f.label :user %><br/>
+    <%= f.collection_select :user_id, User.where('is_admin = ?', false), :id, :email, prompt: "Select User", class: "form-control" %><br/>
+    </div><br/>
+    <% end %>
+
     <div class="form-group">
     <%= f.label :name %> <br/> 
     <%= f.text_field :name, class: "form-control" %> 

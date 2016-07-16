@@ -19,6 +19,10 @@
     <%= f.label :price %><br>
     <%= f.number_field :price, min: 0, max: 100 %>
   </div>
+  <div class="field">
+  <%= f.label :category %><br>
+  <%= f.collection_select :product_category_id, ProductCategory.all, :id, :name, prompt: "Select Category"%>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

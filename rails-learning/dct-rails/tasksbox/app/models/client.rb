@@ -1,4 +1,7 @@
 class Client < ActiveRecord::Base
+    #extend FriendlyId
+    #friendly_id :name, use: :slugged
+
     belongs_to :user
     has_many :projects 
     #has_many :projects dependent: :nullify/:destroy
@@ -27,9 +30,8 @@ class Client < ActiveRecord::Base
         "#{name} - #{company}"
     end
 
-
- #   def to_param
- #       "#{name}"
- #   end
+#    def to_param
+#        "#{name}"
+#    end
 
 end

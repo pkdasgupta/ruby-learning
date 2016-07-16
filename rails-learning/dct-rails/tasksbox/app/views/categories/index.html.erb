@@ -1,0 +1,11 @@
+<h3> Listing Categories <small> <span id="count"> <%= @categories.size %> </span></small> </h3>
+
+<ul id="cg">
+<% @categories.each { |c| %>
+	<li id="li_<%= c.id %>"> <%= c.name %> 
+	<%= link_to "x", category_path(c), method: :delete, data: {confirm: "Are you Sure?", remote: true} %>
+	</li>
+	<% } %>
+</ul>
+
+<%= link_to "Add Category", new_category_path, remote: true, id: "add_category" %>

@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
     # For APIs, you may want to use :null_session instead.
     protect_from_forgery with: :exception
 
+    # Receommended for dealing with ForbiddenAttributesError : http://stackoverflow.com/questions/17450185/forbidden-attributes-error-in-rails-4-when-encountering-a-situation-where-one-wo
+    before_filter do
+      resource = controller_name.singularize.to_sym
+      method = "#{resource}_params"
+      params[resource] &&= send(method) if respond_to?(method, true)
+    end
+
     helper_method :current_project
 
     def current_project

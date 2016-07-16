@@ -15,6 +15,9 @@ gem 'chartkick'
 # Cancan gem for Authorization
 gem 'cancan'
 
+# Friendly_id Gem for user-friendly URLs
+gem 'friendly_id'
+
 # GroupDate gem for grouping data
 gem 'groupdate'
 

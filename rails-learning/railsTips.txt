@@ -181,3 +181,12 @@ In controller level, We use the method 'layout <layout_name>' at the beginning o
 26. Gems for Backend Admin
     -ActiveAdmin 
     -Administrate
+
+27. (n+1)-query problem :
+gem : bullet gem : helps identify the issue in dev environment.
+
+28. jQuery datatables :
+<th>_count == <td>_count
+https://datatables.net/
+
+29. chosen : https://harvesthq.github.io/chosen/

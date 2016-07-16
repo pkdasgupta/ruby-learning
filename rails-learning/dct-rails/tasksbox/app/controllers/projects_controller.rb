@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
     before_filter :authenticate_user! #except: [:index]
     
     def index
-        @projects = current_user.projects
+        @projects = current_user.is_admin ? Project.all : current_user.projects
     end
 
     def new 
@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 
     def show
         begin
-            @project = current_user.projects.find(params[:id])
+            @project = current_user.is_admin ? Project.find(params[:id]) : current_user.projects.find(params[:id])
             @task = Task.new
         rescue ActiveRecord::RecordNotFound
             redirect_to projects_path, notice: "Oops! Project Unavailable !!"

@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   get 'sandbox/projects'
 
+  get 'sandbox/job_search'
+
+  get 'sandbox/search_results'
+
   get 'clients/projects'
 
   get 'say/hello'

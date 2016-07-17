@@ -1,0 +1,10 @@
+<h1> Job Search Matches </h1>
+<h2> Total Jobs : <%= @jobs["totalResults"] %> <small> Jobs on <%= params[:job_type] %> in <%= params[:location] %></small></h2>
+
+<% for job in @jobs["results"] %>
+<div class="well">
+<h4> <%= job["jobtitle"] %></h4>
+</div>
+<% end %>
+
+<%= link_to "Search Again", :back %>

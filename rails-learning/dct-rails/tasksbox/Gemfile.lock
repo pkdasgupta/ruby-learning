@@ -69,6 +69,9 @@ GEM
       activesupport (>= 4.1.0)
     groupdate (3.0.0)
       activesupport (>= 3)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -88,11 +91,14 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    multi_xml (0.5.5)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     paranoia (2.1.5)
       activerecord (~> 4.0)
+    rabl (0.13.0)
+      activesupport (>= 2.3.14)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -173,9 +179,11 @@ DEPENDENCIES
   faker
   friendly_id
   groupdate
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
   paranoia
+  rabl
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

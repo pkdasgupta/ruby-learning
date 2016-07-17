@@ -22,6 +22,7 @@ class TasksController < ApplicationController
 	def mark_as_complete
 		task = Task.find(params[:task_id])
 		task.update_attributes(is_completed: true)
+		Notification.completed(task,current_user).deliver!
 		redirect_to :back
 	end
 

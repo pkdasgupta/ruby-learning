@@ -1,0 +1,10 @@
+<p> Hello <%= @task.project.client.name %>, </p>
+
+<p>
+  This is to update you that the Task :<strong> <%= @task.title %> </strong> from Project : <strong> <%= @task.project.name %> </strong> has been marked as Completed.
+ </p>
+
+<p>
+Warm Regards, <br/>
+<%= @user.email %>
+</p>

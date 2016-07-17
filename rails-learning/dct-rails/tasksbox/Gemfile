@@ -21,6 +21,12 @@ gem 'friendly_id'
 # GroupDate gem for grouping data
 gem 'groupdate'
 
+# RubyAPIBuilderLanguage : To provide through API[JSON] feature 
+gem 'rabl'
+
+# http_client to call URLs : HTTParty
+gem 'httparty'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record

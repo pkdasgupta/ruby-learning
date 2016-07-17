@@ -30,8 +30,8 @@ class Client < ActiveRecord::Base
         "#{name} - #{company}"
     end
 
-#    def to_param
-#        "#{name}"
-#    end
+    def to_param
+        "#{id}-#{name}"
+    end
 
 end

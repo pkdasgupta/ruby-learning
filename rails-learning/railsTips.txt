@@ -190,3 +190,8 @@ gem : bullet gem : helps identify the issue in dev environment.
 https://datatables.net/
 
 29. chosen : https://harvesthq.github.io/chosen/
+
+30. Mailer in RoR :
+rails g mailer <name> <action_names>
+rails g mailer notification completed incomplete
+

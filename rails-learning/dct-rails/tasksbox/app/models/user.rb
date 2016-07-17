@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 	has_many :projects
 	has_many :tasks
 
+  after_create :setup_user_role
+
     has_many :permissions
     has_many :roles, through: :permissions
 	
@@ -15,4 +17,11 @@ class User < ActiveRecord::Base
   def role?(role)
       self.roles.pluck(:name).include? role
   end
+
+  private
+
+  def setup_user_role
+    self.roles.push(Role.second)
+  end
+  
 end

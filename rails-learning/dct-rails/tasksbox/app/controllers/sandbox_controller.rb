@@ -1,6 +1,6 @@
 class SandboxController < ApplicationController
-  require 'json'
-  require 'httparty'
+  #require 'json'
+  #require 'httparty'
 
   def clients
       @clients = Client.all

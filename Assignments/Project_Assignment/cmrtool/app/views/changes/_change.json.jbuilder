@@ -1,0 +1,2 @@
+json.extract! change, :id, :title, :jira, :purpose, :start_time, :lead_time, :target, :pic, :service_impact, :delay_cause, :result, :rollback_cause, :created_at, :updated_at
+json.url change_url(change, format: :json)

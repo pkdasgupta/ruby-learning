@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="page-header">
+        <h2>Changes <small><%= controller.action_name %></small></h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Jira</th>
+            <th>Start time</th>
+            <th>Pic</th>
+            <th>Result</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @changes.each do |change| %>
+            <tr>
+              <td><%= change.title %></td>
+              <td><%= change.jira %></td>
+              <td><%= change.start_time %></td>
+              <td><%= change.pic %></td>
+              <td><%= change.result %></td>
+              <td><%= link_to 'Show', change %></td>
+              <td><%= link_to 'Edit', edit_change_path(change) %></td>
+              <td><%= link_to 'Destroy', change, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="col-md-8">
+
+    </div>
+</div>

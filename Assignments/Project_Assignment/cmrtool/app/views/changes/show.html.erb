@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @change.title %>
+</p>
+
+<p>
+  <strong>Jira:</strong>
+  <%= @change.jira %>
+</p>
+
+<p>
+  <strong>Purpose:</strong>
+  <%= @change.purpose %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @change.start_time %>
+</p>
+
+<p>
+  <strong>Lead time:</strong>
+  <%= @change.lead_time %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @change.target %>
+</p>
+
+<p>
+  <strong>Pic:</strong>
+  <%= @change.pic %>
+</p>
+
+<p>
+  <strong>Service impact:</strong>
+  <%= @change.service_impact %>
+</p>
+
+<p>
+  <strong>Delay cause:</strong>
+  <%= @change.delay_cause %>
+</p>
+
+<p>
+  <strong>Result:</strong>
+  <%= @change.result %>
+</p>
+
+<p>
+  <strong>Rollback cause:</strong>
+  <%= @change.rollback_cause %>
+</p>
+
+<%= link_to 'Edit', edit_change_path(@change) %> |
+<%= link_to 'Back', changes_path %>

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  jira: MyString
+  purpose: MyText
+  start_time: 2016-07-23 11:43:09
+  lead_time: 1.5
+  target: MyText
+  pic: MyString
+  service_impact: MyText
+  delay_cause: MyText
+  result: MyString
+  rollback_cause: MyText
+
+two:
+  title: MyString
+  jira: MyString
+  purpose: MyText
+  start_time: 2016-07-23 11:43:09
+  lead_time: 1.5
+  target: MyText
+  pic: MyString
+  service_impact: MyText
+  delay_cause: MyText
+  result: MyString
+  rollback_cause: MyText

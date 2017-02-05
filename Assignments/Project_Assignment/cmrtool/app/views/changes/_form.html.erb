@@ -1,0 +1,72 @@
+<%= form_for(change) do |f| %>
+  <% if change.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(change.errors.count, "error") %> prohibited this change from being saved:</h2>
+
+      <ul>
+      <% change.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul> 
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :jira %>
+    <%= f.text_field :jira %>
+  </div>
+
+  <div class="field">
+    <%= f.label :purpose %>
+    <%= f.text_area :purpose %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_time %>
+    <%= f.datetime_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lead_time %>
+    <%= f.text_field :lead_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :target %>
+    <%= f.text_area :target %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pic %>
+    <%= f.text_field :pic %>
+  </div>
+
+  <div class="field">
+    <%= f.label :service_impact %>
+    <%= f.text_area :service_impact %>
+  </div>
+
+  <div class="field">
+    <%= f.label :delay_cause %>
+    <%= f.text_area :delay_cause %>
+  </div>
+
+  <div class="field">
+    <%= f.label :result %>
+    <%= f.text_field :result %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rollback_cause %>
+    <%= f.text_area :rollback_cause %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

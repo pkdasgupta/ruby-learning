@@ -195,7 +195,7 @@ https://datatables.net/
 rails g mailer <name> <action_names>
 rails g mailer notification completed incomplete
 
-31. App Deployment :
+31. App Deployment : [Every change needs to be pushed]
 
 A. Login to Heroku : heroku login
 B. Initialise the git : git init ; git add . ; git commit -m "<msg>" ; git push heroku master
